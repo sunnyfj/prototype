@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style></style>
+
+	<script>
+		//继承：子类不影响父类。子类可以继承父类的一些功能（代码复用）
+
+		//属性的继承： 调用父类的构造函数 call
+
+		//方法的继承： 通过 extent for in 拷贝继承 （jQuery也是采用这种方式）
+
+		function CreatePerson(name,sex){ //父类
+			this.name = name;
+			this.sex = sex;
+		}
+
+		CreatePerson.prototype.showName = function (){
+			alert(this.name);
+		}
+
+		var create1 = new CreatePerson('小明',16);
+		//create1.showName();
+
+
+
+
+		function CreateStar(name,sex,job){ //子类
+			CreatePerson.call(this,name,sex);
+			this.job = job;
+		}
+		CreateStar.prototype.showJob = function () {
+			alert(this.job);
+		}
+		//CreateStar.prototype = CreatePerson.prototype; 对象直接赋值  会出现问题
+		extent(CreateStar.prototype,CreatePerson.prototype)
+
+		var create2 = new CreateStar('黄晓明',18,'演员')
+		create2.showName();
+		create2.showJob();
+
+
+		function extent(obj1,obj2){
+			for(var attr in obj2){
+				obj1[attr] = obj2[attr]
+			}
+		}
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

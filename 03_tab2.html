@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		#box{
+			margin:100px;
+		}
+		#box div{
+			width: 300px;
+			height: 300px;
+			border: 1px solid #999;
+			display: none;
+		}
+		#box input.active {
+			background-color: #f57d00;
+			color: #fff;
+		}
+
+	</style>
+	<script>
+		/*var oBox = null;
+		var aBtn = null;
+		var aDiv = null;
+
+		window.onload = function(){
+			oBox = document.getElementById('box');
+			aBtn = oBox.getElementsByTagName('input');
+			aDiv = oBox.getElementsByTagName('div');
+
+			init();
+		}
+		function init() {
+			for(var i=0; i<aBtn.length; i++){
+				aBtn[i].index = i;
+				aBtn[i].onclick = change;
+			}
+		}
+		function change(){
+			for(var j=0; j<aBtn.length; j++){
+				aBtn[j].className = '';
+				aDiv[j].style.display = 'none';
+			}
+			this.className ='active';
+			aDiv[this.index].style.display = 'block';
+		}*/
+
+		//改面向对象 
+			//1、全局变量就是属性 
+			//2、可以有全局变量 
+			//3、把onload中不是赋值的语句放到单独的函数中去
+
+
+
+		//改this的问题 尽量让面向当对象中的this 指向对象
+		window.onload = function(){
+			var tab1 = new Tab();
+			tab1.init();
+		}
+
+		function Tab(){
+			this.oBox = document.getElementById('box');
+			this.aBtn = this.oBox.getElementsByTagName('input');
+			this.aDiv = this.oBox.getElementsByTagName('div');
+		}
+		Tab.prototype.init = function (){
+			var This = this;
+			for(var i=0; i<this.aBtn.length; i++){
+				this.aBtn[i].index = i;
+				this.aBtn[i].onclick = function(){
+					//this  是按钮
+					This.change(this);
+				}
+			}
+		}
+
+		Tab.prototype.change = function (obj){
+			for(var j=0; j<this.aBtn.length; j++){
+				this.aBtn[j].className = '';
+				this.aDiv[j].style.display = 'none';
+			}
+			obj.className ='active';
+			this.aDiv[obj.index].style.display = 'block';
+		}
+		
+
+	</script>
+</head>
+<body>
+	<div id="box">
+		<input class="active" type="button" name="" value="btn1">
+		<input type="button" name="" value="btn1">
+		<input type="button" name="" value="btn1">
+		<div style="display: block;">1</div>
+		<div>2</div>
+		<div>3</div>
+	</div>
+</body>
+</html>

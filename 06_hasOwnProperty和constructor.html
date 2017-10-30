@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style></style>
+
+	<script>
+		//hasOwnProperty: 看是不是对象自身下面的属性
+		
+		var arr = [];
+		arr.num = 10;
+		Array.prototype.num2 = 20;
+
+		//alert( arr.hasOwnProperty('num'))//true
+
+		//alert( arr.hasOwnProperty('num2'))//false
+
+
+		//constructor : 查看对象的构造函数
+
+		function Aaa(){
+
+		}
+		var a1 = new Aaa();
+
+		Aaa.prototype.constructor = Aaa; //程序自动生成的   手动修改会冲突掉系统的
+
+
+		//alert(a1.hasOwnProperty)//找到找到  最外层的原型链  Object.prototype
+
+
+		//alert(a1.constructor);// Aaa
+
+		var arr = [];
+		//alert(arr.constructor == Array); //true
+
+		function B(){
+
+		}
+		/*B.prototype.name = 'bbb';
+		B.prototype.age = 18;*/
+
+		B.prototype = {   //Object  这么写 相当于的重新赋值  不经意间就改了  constructor   所以重新指定一下 constructor
+			constructor: B,
+			name : 'bbb',
+			age : 18
+		}
+
+		var  b1 = new B();
+
+		//alert( b1.constructor )
+
+
+		//很多系统自带的方法  for in 是循环不到的
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

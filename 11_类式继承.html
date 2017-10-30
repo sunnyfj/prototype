@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style>
+		
+	</style>
+
+	<script>
+
+		//类式继承： js是没有类的概念的，把js中的构造函数看做类。
+		//要做属性和方法的继承要分开继承
+
+		function Aaa() {
+			this.name = 'aaa';
+		}
+		Aaa.prototype.showName = function(){
+			alert(this.name);
+		}
+
+
+		function Bbb(){
+			Aaa.call(this);
+		}
+
+		var F = function(){};  //这里的f是避免属性继承 只继承方法  属性继承还是使用 call
+		F.prototype = Aaa.prototype;
+		Bbb.prototype = new F();
+		Bbb.prototype.constructor = Bbb;//修正指向问题
+
+
+		var b1 = new Bbb();
+		b1.showName();
+
+		alert(b1.constructor)
+
+
+
+
+
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

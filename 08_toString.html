@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style></style>
+
+	<script>
+		
+		//toString() :系统对象下面都是自带的， 自己写的对象都是通过原型链找Object下面的
+		//作用:把对象转成字符串
+
+
+		var  arr = [];
+
+		//alert(arr.toString);
+		//alert(arr.toString == Object.prototype.toString) //false
+
+
+		function Aa(){
+
+		}
+		var a1 = new Aa();
+
+		//alert(a1.toString == Object.prototype.toString) //true
+
+		var arr2 = [1,2,3];
+		Array.prototype.toString = function(){
+			return this.join('+');
+		}
+		//alert( arr2.toString());
+
+
+		//做类型判断
+
+		var s = null;
+		//alert( Object.prototype.toString.call(s)); //[object null]
+
+		//alert( Object.prototype.toString.call(s) == '[object Null]'); //true
+		
+
+		window.onload = function (){
+			var oF = document.createElement('iframe');
+			document.body.appendChild(oF);
+
+			var ifArray = window.frames[0].Array;
+			var arr3 = new ifArray();
+
+			alert(arr3.constructor == Array); //false
+
+			alert(arr3 instanceof Array);	//false
+
+			alert(Object.prototype.toString.call(arr) == '[object Array]'); //true
+
+			//用来判断类型 最好的方式 toString.call  特殊情况下 他俩会失效
+		}
+
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

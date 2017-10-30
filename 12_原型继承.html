@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style>
+		
+	</style>
+
+	<script>
+
+		//原型继承： cloneObj(obj)
+
+		
+		var a = {
+			name:'小明'
+		}
+
+		var b = cloneObj(a);
+		b.name  = '小强';
+
+		//alert(b.name)
+		//alert(a.name)
+
+		function cloneObj(obj){
+			var F = function(){};
+			F.prototype = obj;
+			return new F();
+		}
+
+
+		//拷贝继承： 通用的型的  有new 或 无new的时候都可以
+
+		//类式继承： new构造函数
+
+		//原型继承： 无new的对象
+
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>
