@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" value="btn" id="btn">
+
+	<input type="button" value="btn" id="btn1">
+
+
+	<script>
+
+		window.onload = function(){
+
+			var countDown = new CountDown('btn',{count:20});
+			var countDown1 = new CountDown('btn1',{count:30});
+
+		}
+		
+
+		function CountDown(id,opt){
+			this.obj = document.getElementById(id);
+			this.settings = {
+				count:60
+			};
+			this.timer = null;
+			this.init(opt);
+		}
+		CountDown.prototype.init = function(opt){
+			var This = this;
+
+			extent(This.settings,opt);
+
+			this.obj.onclick = function(opt){
+
+				This.obj.disabled = true;
+
+				This.timer = setInterval(function(){
+
+					This.settings.count--;
+					if(This.settings.count < 1){
+						This.obj.value = '以开启';
+						This.obj.disabled = false;
+						clearInterval(This.timer);
+						return false;
+					}
+					This.obj.value = This.settings.count+'后再次开启';
+
+				},1000)
+			}
+			
+		}
+
+		function extent(obj1,obj2){
+			for(var attr in obj2){
+				obj1[attr] = obj2[attr];
+			}
+		}
+
+	</script>
+</body>
+</html>
